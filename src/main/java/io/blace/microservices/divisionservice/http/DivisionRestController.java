@@ -50,6 +50,18 @@ public class DivisionRestController {
     }
     
     @CrossOrigin
+    @PostMapping("/divisions")
+    public ResponseEntity<Division> createdivisions(@RequestBody List<Division> divisions) {
+    		logger.info("createdivisions requested");
+    		
+    		for( Division division : divisions) {
+    			divisionrepo.save(division);
+    		}
+    		
+        return new ResponseEntity<Division>(HttpStatus.CREATED);
+    }
+    
+    @CrossOrigin
     @DeleteMapping(value = "/division")
     public ResponseEntity<Division> deletedivision(@RequestParam("deleteid") String deleteid) {
 		logger.info("deletedivision requested for " +  deleteid);
